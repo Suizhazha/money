@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const CategorySection = styled.section`
   font-size: 24px;
-  > ul{
+  > ol{
     display:flex;
     background:#c4c4c4;
     > li {
