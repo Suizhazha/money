@@ -26,18 +26,21 @@ function Money() {
         </ol>
         <button>新增标签</button>
       </TagsSection>
+
       <NotesSection>
         <label>
           <span>备注</span>
           <input type="text" placeholder="在这里添加备注"/>
         </label>
       </NotesSection>
+
       <CategorySection>
         <ol>
           <li className="selected">支出</li>
           <li>收入</li>
         </ol>
       </CategorySection>
+
       <NumberPadSection>
         <div className="output">
           100
