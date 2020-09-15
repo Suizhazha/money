@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 
 
-const Tags = styled.section`
+const TagsStyle = styled.section`
 background: #FFFFFF;padding: 12px 16px;
   flex-grow: 1; display:flex; flex-direction: column;
   justify-content: flex-end; align-items: flex-start;
@@ -40,7 +40,7 @@ const TagsSection: React.FC = () => {
   const onToggleTag = (tag:string)=>{
 const index = selectedTags.indexOf(tag)
     if (index>= 0 ){
-      //如果tag已经被选中，就复制所以没有被选中的tag,作为新的selectdTag
+      //如果tag已经被选中，就复制所以没有被选中的tag,作为新的selectedTag
      setSelectedTags( selectedTags.filter((item: string) => item!== tag))
     }
     else {
@@ -49,7 +49,7 @@ const index = selectedTags.indexOf(tag)
   }
 
   return (
-    <Tags>
+    <TagsStyle>
       <ol>
         {tags.map((tag: string) =>
           <li key={tag}
@@ -59,7 +59,7 @@ const index = selectedTags.indexOf(tag)
         )}
       </ol>
       <button onClick={onAddTag}>新增标签</button>
-    </Tags>
+    </TagsStyle>
   )
 }
 
