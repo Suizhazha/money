@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TagsSection from './Money/TagsSection';
 import CategorySection from './Money/CategorySection';
 import NotesSection from './Money/NoteSection';
-import NumberPadSection from './Money/NumberPadSection';
+import NumberPadSection from './Money/NumberPad/NumberPadSection';
 
 
 
