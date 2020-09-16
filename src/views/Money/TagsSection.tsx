@@ -24,11 +24,16 @@ background: burlywood;
 }
 `
 
+type Props ={
+  value:string[] ,
+  onChange: (strings: string[])=>void
+}
+
 //FC为FunctionComponent缩写
-const TagsSection: React.FC = () => {
+const TagsSection: React.FC<Props> = (props) => {
   const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行'])
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
-  
+  const selectedTags = props.value
+
 
   const onAddTag = () => {
     const tagName = window.prompt('新标签name:')
@@ -41,10 +46,10 @@ const TagsSection: React.FC = () => {
 const index = selectedTags.indexOf(tag)
     if (index>= 0 ){
       //如果tag已经被选中，就复制所以没有被选中的tag,作为新的selectedTag
-     setSelectedTags( selectedTags.filter((item: string) => item!== tag))
+     props.onChange (selectedTags.filter((item: string) => item!== tag))
     }
     else {
-      setSelectedTags([...selectedTags,tag])
+      props.onChange ([...selectedTags,tag])
     }
   }
 

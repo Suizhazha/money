@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 
 const NotesStyle = styled.section`
   background: #f5f5f5;  padding: 0 16px;  font-size: 14px;
@@ -14,12 +14,17 @@ const NotesStyle = styled.section`
   }
 `
 
-const NoteSection:React.FC = ()=>{
-  const [note,setNote] = useState('')
+type Props ={
+  value:string,
+  onChange: (value: string)=>void
+}
+
+const NoteSection:React.FC <Props> = (props)=>{
+  const note=props.value
 const refInput = useRef<HTMLInputElement>(null)
 const onBlur =()=>{
     if (refInput.current){
-      setNote(refInput.current.value)
+      props.onChange(refInput.current.value)
       console.log(refInput.current.value);
     }
 }

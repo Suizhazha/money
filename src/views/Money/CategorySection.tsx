@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, {useState} from 'react';
+import React from 'react';
 
 const CategoryStyle= styled.section`
   font-size: 24px;
@@ -19,20 +19,24 @@ const CategoryStyle= styled.section`
   }
 `
 
-const CategorySection:React.FC = ()=>{
-  const [category,setCategory] = useState('-') //-表示支出，+表示收入
-  console.log(category);
+type Props ={
+  value:'-' | '+' ,
+  onChange: (value:'-'|'+')=>void
+}
+
+const CategorySection:React.FC <Props > = (props)=>{
+  const category = props.value
   return(
 <CategoryStyle>
   <ol>
     <li className={category==='-'?'selected':''}
     onClick={()=>{
-      setCategory('-')
+      props.onChange('-')
     }}
     >支出</li>
     <li className={category==='+'?'selected':''}
         onClick={()=>{
-          setCategory('+')
+          props.onChange('+')
         }}
     >收入</li>
   </ol>
