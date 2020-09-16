@@ -30,13 +30,6 @@ const onChange = (obj:Partial<typeof selected>)=>{
 
   return (
     <MyLayout>
-      {selected.tags.join(',')}
-      <hr/>
-      {selected.note}
-      <hr/>
-      {selected.category}
-      <hr/>
-      {selected.amount}
 
       <TagsSection value={selected.tags}
                    onChange={tags =>
