@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import React, {useState} from 'react';
+import React from 'react';
+import useTags from '../../useTags';
 
 
 const TagsStyle = styled.section`
@@ -25,41 +26,42 @@ background: burlywood;
 `
 
 type Props ={
-  value:string[] ,
-  onChange: (strings: string[])=>void
+  value:number[] ,
+  onChange: (selected: number[])=>void
 }
 
 //FC为FunctionComponent缩写
 const TagsSection: React.FC<Props> = (props) => {
-  const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行'])
-  const selectedTags = props.value
+  const {tags, setTags} = useTags()
+  const selectedTagIds = props.value
 
   const onAddTag = () => {
     const tagName = window.prompt('新标签name:')
     if (tagName) {
-      setTags([...tags, tagName])
+      setTags([...tags, {id:Math.random(),name:tagName}])
     }
   }
 
-  const onToggleTag = (tag:string)=>{
-const index = selectedTags.indexOf(tag)
+  const onToggleTag = (tagId:number)=>{
+const index = selectedTagIds.indexOf(tagId)
     if (index>= 0 ){
       //如果tag已经被选中，就复制所以没有被选中的tag,作为新的selectedTag
-     props.onChange (selectedTags.filter((item: string) => item!== tag))
+     props.onChange (selectedTagIds.filter((item) => item!== tagId))
     }
     else {
-      props.onChange ([...selectedTags,tag])
+      props.onChange ([...selectedTagIds,tagId])
     }
   }
+const getClass =(tagId:number)=>selectedTagIds.indexOf(tagId)>=0? 'selected':''
 
   return (
     <TagsStyle>
       <ol>
-        {tags.map((tag: string) =>
-          <li key={tag}
-          onClick={()=>onToggleTag(tag)}
-              className = {selectedTags.indexOf(tag)>=0? 'selected':''}
-          >{tag}</li>
+        {tags.map((tag) =>
+          <li key={tag.id}
+          onClick={()=>onToggleTag(tag.id)}
+              className = {getClass(tag.id)}
+          >{tag.name}</li>
         )}
       </ol>
       <button onClick={onAddTag}>新增标签</button>
