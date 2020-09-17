@@ -1,9 +1,9 @@
-import Layout from '../components/Layout';
+import Layout from 'components/Layout';
 import React from 'react';
 import styled from 'styled-components';
 import Icon from 'components/Icon';
 import { Link } from 'react-router-dom';
-import useTags from '../useTags';
+import useTags from 'useTags';
 
 const TagList = styled.ol`
   font-size: 16px; 

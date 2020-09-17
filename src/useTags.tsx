@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import createId from './lib/createId';
+import createId from 'lib/createId';
 
 
 //提前存好，不然每次都会生成4个新的
