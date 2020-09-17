@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import useTags from '../../useTags';
+import createId from '../../lib/createId';
 
 
 const TagsStyle = styled.section`
@@ -38,7 +39,7 @@ const TagsSection: React.FC<Props> = (props) => {
   const onAddTag = () => {
     const tagName = window.prompt('新标签name:')
     if (tagName) {
-      setTags([...tags, {id:Math.random(),name:tagName}])
+      setTags([...tags, {id:createId(),name:tagName}])
     }
   }
 
