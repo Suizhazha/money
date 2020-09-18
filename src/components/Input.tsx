@@ -6,20 +6,19 @@ const Label = styled.label`
     > span { margin-right: 16px; white-space: nowrap; }
     > input {
       display:block; width: 100%;
-      height: 72px; background: none;
+      height: 44px; background: none;
       border: none;
     }
 `
 
-type Props ={
-  label:string,
 
-}& React.InputHTMLAttributes<HTMLInputElement>;
-
+type Props = {
+  label: string;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 const Input: React.FC<Props> = (props) => {
   const {label, children, ...rest} = props;
   return (
-    <Label>
+    <Label >
       <span>{props.label}</span>
       <input {...rest} />
     </Label>
@@ -27,3 +26,5 @@ const Input: React.FC<Props> = (props) => {
 };
 
 export default Input
+
+
