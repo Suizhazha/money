@@ -29,8 +29,10 @@ const onChange = (obj:Partial<typeof selected>)=>{
 }
 
   return (
-    <MyLayout>
 
+    <MyLayout>
+      {JSON.stringify(selected)}
+<hr/>
       <TagsSection value={selected.tagIds}
                    onChange={tagIds =>
                      onChange({tagIds})}/>

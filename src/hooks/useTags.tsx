@@ -7,7 +7,7 @@ const useTags = () => { //封装一个自定义Hook
   const [tags, setTags] = useState<{ id: number; name: string }[]>([]);
 
 
-  //解决idMax不匹配问题
+  //组件挂载时执行，解决idMax不匹配问题
 useEffect(()=>{
   let localTags = JSON.parse(window.localStorage.getItem('tags')||'[]')
   if (localTags.length===0){
