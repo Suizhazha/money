@@ -28,36 +28,42 @@ margin-top: 8px;
 `
 
 const TagEdit:React.FC = ()=>{
-  const {findTag,updateTags}= useTags()
+  const {findTag,updateTag,deleteTag}= useTags()
   let {id} = useParams<Params>()
   const tag = findTag(parseInt(id))
-
 
   return(
     <Layout>
       <Topbar>
-          <Icon name='left'/>
-          <span>编辑标签</span>
-          <Icon />
+        <Icon name='left'/>
+        <span>编辑标签</span>
+        <Icon />
       </Topbar>
 
-<InputWrapper>
-  <Input label='标签名：' type='text' value={tag.name}
-  onChange={e=>{
-    updateTags(tag.id,{name:e.target.value})
-    console.log(e.target.value);
-  }}
-  > </Input>
-</InputWrapper>
+      {tag?<div>
+        <InputWrapper>
+          <Input label='标签名：' type='text' value={tag.name}
+                 onChange={e=>{
+                   updateTag(tag.id,{name:e.target.value})
+                   console.log(e.target.value);
+                 }}
+          > </Input>
+        </InputWrapper>
 
-<Center>
-  <Space/>
-  <Space/>
-  <Space/>
-  <Button>删除标签</Button>
-</Center>
+        <Center>
+          <Space/>
+          <Space/>
+          <Space/>
+          <Button onClick={()=>{
+            deleteTag(tag.id)
+          }}>删除标签</Button>
+        </Center>
+
+      </div>:<Center>Tag不存在了</Center>
+        }
     </Layout>
   )
+
 }
 
 export default TagEdit

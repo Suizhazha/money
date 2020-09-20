@@ -26,15 +26,23 @@ const useTags = () => { //封装一个自定义Hook
     return result;
   };
 
-  const updateTags = (id: number, obj: { name: string }) => {
+  const updateTag = (id: number, obj: { name: string }) => {
     const index = findTagIndex(id);
-    const tagsClone = JSON.parse(JSON.stringify(tags));//深拷贝tags
+    //深拷贝tags，因为React不推荐修改原数据
+    const tagsClone = JSON.parse(JSON.stringify(tags));
     //将tagsClone的第index删除，换成{id:id,name:obj.name}
     tagsClone.splice(index, 1, {id: id, name: obj.name});
     setTags(tagsClone)
   };
 
-  return {tags, setTags, findTag,updateTags,findTagIndex};
+  const deleteTag = (id:number)=>{
+    //可以跟updateTags比较
+    const index = findTagIndex(id);
+    const tagsClone = JSON.parse(JSON.stringify(tags));
+    tagsClone.splice(index, 1);
+    setTags(tagsClone)
+  }
+  return {tags, setTags, findTag,updateTag,findTagIndex,deleteTag};
 };
 
 export default useTags;
