@@ -3,25 +3,26 @@ import createId from 'lib/createId';
 import useUpdate from './useUpdate';
 
 
-//提前存好，不然每次都会生成4个新的
-const defaultTags = [
-  {id: createId(), name: '衣'},
-  {id: createId(), name: '食'},
-  {id: createId(), name: '住'},
-  {id: createId(), name: '行'}
-];
-
 const useTags = () => { //封装一个自定义Hook
-  const [tags, setTags] = useState<{ id: number; name: string }[]>(
-    defaultTags
-  );
+  const [tags, setTags] = useState<{ id: number; name: string }[]>([]);
 
 
-  //tags的数据持久化
-  useEffect(()=>{
-   setTags(JSON.parse(window.localStorage.getItem('tags')||''))
-  },[])
+  //解决idMax不匹配问题
+useEffect(()=>{
+  let localTags = JSON.parse(window.localStorage.getItem('tags')||'[]')
+  if (localTags.length===0){
+    localTags=[
+      {id:createId(),name:'衣'},
+      {id:createId(),name:'食'},
+      {id:createId(),name:'住'},
+      {id:createId(),name:'行'}
+    ]
+  }
+  setTags(localTags)
+},[])
 
+
+  //tags的数据持久化问题
 useUpdate(()=>{
         window.localStorage.setItem('tags',JSON.stringify(tags))
 },[tags])
@@ -61,10 +62,12 @@ useUpdate(()=>{
   }
   const addTag = ()=>{
     const tagName = window.prompt('请输入新标签：')
-    if (tagName){
+    if (tagName!==null && tagName!== ''){
       setTags([...tags,{id:createId(),name:tagName}])
     }
-
+if (tagName===''){
+  alert('标签名不能为空')
+}
   }
 
   return {tags, setTags, findTag,updateTag,findTagIndex,deleteTag,addTag};
