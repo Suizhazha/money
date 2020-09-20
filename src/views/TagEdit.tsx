@@ -28,7 +28,7 @@ margin-top: 8px;
 `
 
 const TagEdit:React.FC = ()=>{
-  const {findTag}= useTags()
+  const {findTag,updateTags}= useTags()
   let {id} = useParams<Params>()
   const tag = findTag(parseInt(id))
 
@@ -42,7 +42,12 @@ const TagEdit:React.FC = ()=>{
       </Topbar>
 
 <InputWrapper>
-  <Input label='标签名：' type='text' value={tag.name}> </Input>
+  <Input label='标签名：' type='text' value={tag.name}
+  onChange={e=>{
+    updateTags(tag.id,{name:e.target.value})
+    console.log(e.target.value);
+  }}
+  > </Input>
 </InputWrapper>
 
 <Center>
