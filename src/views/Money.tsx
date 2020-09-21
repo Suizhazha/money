@@ -29,8 +29,7 @@ const defaultFormDate={
 function Money() {
   const [selected, setSelected] = useState(defaultFormDate);
 
-  const {records, addRecords} = useRecords();
-  console.log(records);
+  const { addRecords} = useRecords();
 
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({
