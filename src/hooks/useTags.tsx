@@ -70,7 +70,12 @@ if (tagName===''){
 }
   }
 
-  return {tags, setTags, findTag,updateTag,findTagIndex,deleteTag,addTag};
+  const getName =(id:number)=>{
+const tag =tags.filter(tag=>tag.id===id )[0]
+return tag? tag.name: ''
+  }
+
+  return {tags, setTags, getName,findTag,updateTag,findTagIndex,deleteTag,addTag};
 };
 
 export default useTags;
