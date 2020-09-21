@@ -36,16 +36,15 @@ function Money() {
   };
 
   const submit = () => {
-    addRecords(selected);
-    alert('记录完成！');
-    setSelected(defaultFormDate)
-  };
+    if (addRecords(selected)) {
+      alert('记录完成！');
+      setSelected(defaultFormDate)
+    }
+  }
 
   return (
 
     <MyLayout>
-      {JSON.stringify(selected)}
-      <hr/>
       <TagsSection value={selected.tagIds}
                    onChange={tagIds =>
                      onChange({tagIds})}/>
@@ -71,4 +70,3 @@ function Money() {
 }
 
 export default Money;
-

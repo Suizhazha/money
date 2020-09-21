@@ -28,7 +28,16 @@ const useRecords = () => {
 const addRecords = (newRecord:newRecordItem)=>{
  const record = {...newRecord,createdAt:(new Date()).toISOString()}
   setRecords([...records,record])
+  if (newRecord.amount<=0 ){
+    alert('输入数据错误')
+    return false
+  }
+if (newRecord.tagIds.length===0){
+  alert('请选择标签')
+  return false
 }
+return true
+    }
 
 
   return {records,addRecords}
