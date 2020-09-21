@@ -4,11 +4,24 @@ import CategorySection from './Money/CategorySection';
 import styled from 'styled-components';
 import useRecords from '../hooks/useRecords';
 import useTags from '../hooks/useTags';
-import dayjs from 'dayjs';
 
 const CategoryWrapper = styled.div`
 background: white;
 `
+
+const Item = styled.div`
+  display:flex;
+  justify-content: space-between;
+  background: white;
+  font-size: 18px;
+  line-height: 20px;
+  padding: 10px 16px;
+  > .note{
+    margin-right: auto;
+    margin-left: 16px;
+    color: #999;
+  }
+`;
 
 function Statistics() {
   const [category,setCategory] = useState<'-'|'+'>('-')
@@ -23,13 +36,19 @@ const {records} = useRecords()
 
       <div>
         {records.map(record =>{
-          return <div>
-            {record.tagIds.map(tagId => <span>{getName(tagId)}</span>)}
-            <hr/>
-            {record.amount}
-            <hr/>
-            {dayjs(record.createdAt).format('YYYY年MM月DD日')}
-          </div>
+          return <Item>
+            <div className='tags'>
+              {record.tagIds.map(tagId => <span>{getName(tagId)}</span>)}
+            </div>
+            {record.note && <div className="note">
+              {record.note}
+            </div>}
+            <div className='amount'>
+              ￥{record.amount}
+            </div>
+
+            {/*{dayjs(record.createdAt).format('YYYY年MM月DD日')}*/}
+          </Item>
         })}
       </div>
     </Layout>
