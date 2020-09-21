@@ -4,6 +4,7 @@ import CategorySection from './Money/CategorySection';
 import styled from 'styled-components';
 import useRecords from '../hooks/useRecords';
 import useTags from '../hooks/useTags';
+import dayjs from 'dayjs';
 
 const CategoryWrapper = styled.div`
 background: white;
@@ -25,7 +26,9 @@ const {records} = useRecords()
           return <div>
             {record.tagIds.map(tagId => <span>{getName(tagId)}</span>)}
             <hr/>
-
+            {record.amount}
+            <hr/>
+            {dayjs(record.createdAt).format('YYYY年MM月DD日')}
           </div>
         })}
       </div>
