@@ -38,6 +38,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
     }
   }
 
+
   return (
     <NumberPadStyle>
       <div className="output">

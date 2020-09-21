@@ -5,34 +5,47 @@ import TagsSection from './Money/TagsSection';
 import CategorySection from './Money/CategorySection';
 import NotesSection from './Money/NoteSection';
 import NumberPadSection from './Money/NumberPad/NumberPadSection';
+import useRecords from '../hooks/useRecords';
 
 
 const MyLayout = styled(Layout)`
   display:flex;
   flex-direction: column;
 `;
+
 type Category = '-' | '+'
 
-function Money() {
-  const [selected, setSelected] = useState({
-    tagIds: [] as number [],
+const defaultFormDate={
+  tagIds: [] as number [],
     note: '',
-    category: '-' as Category,
-    amount: 0
-  });
-
-const onChange = (obj:Partial<typeof selected>)=>{
-  setSelected({
-    ...selected,
-    ...obj
-  })
+  category: '-' as Category,
+  amount: 0,
 }
+
+function Money() {
+  const [selected, setSelected] = useState(defaultFormDate);
+
+  const {records, addRecords} = useRecords();
+  console.log(records);
+
+  const onChange = (obj: Partial<typeof selected>) => {
+    setSelected({
+      ...selected,
+      ...obj
+    });
+  };
+
+  const submit = () => {
+    addRecords(selected);
+    alert('记录完成！');
+    setSelected(defaultFormDate)
+  };
 
   return (
 
     <MyLayout>
       {JSON.stringify(selected)}
-<hr/>
+      <hr/>
       <TagsSection value={selected.tagIds}
                    onChange={tagIds =>
                      onChange({tagIds})}/>
@@ -48,9 +61,9 @@ const onChange = (obj:Partial<typeof selected>)=>{
 
       <NumberPadSection value={selected.amount}
                         onChange={amount =>
-                         onChange({amount})
+                          onChange({amount})
                         }
-                        onOk={() => {}}
+                        onOk={submit}
       />
 
     </MyLayout>
