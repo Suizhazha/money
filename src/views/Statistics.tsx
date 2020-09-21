@@ -22,7 +22,7 @@ const Item = styled.div`
     color: #999;
   }
   >.tags{
-  width: 80px;
+  width: 130px;
   }
 `;
 
@@ -45,12 +45,12 @@ function Statistics() {
 
 const hash:{[key:string]:RecordItem[]}= { }
 
-selectedRecords.forEach(record =>{
+selectedRecords.map(record =>{
 const key =  dayjs(record.createdAt).format('YYYY年MM月DD日')
   if (!(key in hash)){
     hash[key] = []
   }
-  hash[key].push(record)
+  return hash[key].push(record)
 })
 //桶排序，让对象顺序按照时间排序
   const  array = Object.entries(hash).sort((a,b)=>{

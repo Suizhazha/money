@@ -67,7 +67,7 @@ const TagEdit: React.FC = () => {
           }}>删除标签</Button>
         </Center>
 
-      </div> : <Center>Tag不存在了</Center>
+      </div> : <Center>删除成功，请返回查看</Center>
       }
     </Layout>
   );
